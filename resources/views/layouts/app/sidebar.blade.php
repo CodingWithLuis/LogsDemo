@@ -20,6 +20,10 @@
                         {{ __('Users') }}
                     </flux:sidebar.item>
 
+                    <flux:sidebar.item icon="shield-check" :href="route('roles.index')" :current="request()->routeIs('roles.*')">
+                        {{ __('Roles') }}
+                    </flux:sidebar.item>
+
                     <flux:sidebar.item icon="currency-dollar" :href="route('sales.index')" :current="request()->routeIs('sales.*')">
                         {{ __('Sales') }}
                     </flux:sidebar.item>

@@ -49,6 +49,12 @@ class SaleService
         } catch (Throwable $e) {
             DB::rollBack();
 
+            Log::error('Sale created.', [
+                'sale_id' => $sale->id,
+                'performed_by' => auth()->id() ?? null,
+                'error' => $e->getMessage(),
+                'error_code' => $e->getCode(),
+            ]);
             throw $e;
         }
     }

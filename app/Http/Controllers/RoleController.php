@@ -6,6 +6,7 @@ use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use App\Models\Role;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Throwable;
@@ -42,6 +43,13 @@ class RoleController extends Controller
             $role = Role::create([
                 'name' => $request->validated('name'),
                 'slug' => $this->uniqueSlug($request->validated('name')),
+            ]);
+
+            // para nosotros como desarrolladores
+            Log::info('Rol creado exitosamente', [
+                'user_id' => auth()->user()->id,
+                'role_id' => $role->id,
+                'name_role' => $role->name,
             ]);
 
             return redirect()->route('roles.index')
